@@ -4,7 +4,6 @@ import re
 import glob
 import sys
 
-
 folder_name = ['images', 'videos', 'documents', 'music', 'archives', 'unknown']
 
 MUSIC = "music"
@@ -48,7 +47,9 @@ for c, l in zip(CYRILLIC_SYMBOLS, TRANSLATION):
     TRANS[ord(c)] = l
     TRANS[ord(c.upper())] = l.upper()
 
+
 def normalize(file_name):
+
     m = re.match(r"^(.+)\.([\w\d]{2,4})$", file_name)
     file_name = m.group(1)
     extension = m.group(2)
@@ -61,7 +62,9 @@ def normalize(file_name):
     translated_name = re.sub(r"[^\w\d]", "_", translated_name)
     return f"{translated_name}.{extension}"
 
+
 def sort_folders(path):
+
     files = os.listdir(path)
     print(files)
     for file_item in files:
@@ -72,7 +75,9 @@ def sort_folders(path):
                 shutil.move(os.path.join(path, file_item), os.path.join(
                     path, f"{target_path}/{normalize(file_item)}"))
 
+
 def main():
+
     path = sys.argv[1] if len(sys.argv) > 1 else '.'
     for folder in folder_name:
         print(os.path.join(path, folder))
@@ -82,7 +87,8 @@ def main():
         print(path)
     sort_folders(path=path)
 
+
 if __name__ == '__main__':
     main()
-
+    
     
